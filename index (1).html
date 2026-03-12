@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VocaChef — Cook smarter. Talk more. Touch less.</title>
+  <meta name="description" content="VocaChef is your AI-powered voice cooking coach. Generate recipes instantly and cook hands-free with voice commands. Available on Android." />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #faf6f0;
+      --warm-white: #fff9f2;
+      --purple: #5b3fa6;
+      --purple-light: #7c5cc4;
+      --purple-dark: #3d2878;
+      --orange: #e8622a;
+      --orange-light: #f0845a;
+      --charcoal: #1e1a2e;
+      --gray: #6b6478;
+      --gray-light: #c4bdd0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.2rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(250,246,240,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(91,63,166,0.08);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--purple);
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo span { color: var(--orange); }
+
+    .nav-cta {
+      background: var(--purple);
+      color: white;
+      padding: 0.6rem 1.4rem;
+      border-radius: 100px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .nav-cta:hover {
+      background: var(--purple-dark);
+      transform: translateY(-1px);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 5rem 5rem 4rem;
+      gap: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(91,63,166,0.12) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; left: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(232,98,42,0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-text { position: relative; z-index: 1; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(91,63,166,0.1);
+      color: var(--purple);
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--orange);
+    }
+
+    .hero-tagline {
+      font-size: 1.25rem;
+      font-weight: 300;
+      color: var(--gray);
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero-tagline strong {
+      color: var(--charcoal);
+      font-weight: 500;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--purple);
+      color: white;
+      padding: 0.9rem 2rem;
+      border-radius: 100px;
+      font-size: 1rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      box-shadow: 0 4px 20px rgba(91,63,166,0.3);
+    }
+
+    .btn-primary:hover {
+      background: var(--purple-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(91,63,166,0.4);
+    }
+
+    .btn-secondary {
+      color: var(--purple);
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: gap 0.2s;
+    }
+
+    .btn-secondary:hover { gap: 0.7rem; }
+
+    /* ── HERO IMAGE / PHONE MOCKUP ── */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+
+    .phone-frame {
+      width: 280px;
+      height: 560px;
+      background: var(--charcoal);
+      border-radius: 40px;
+      padding: 12px;
+      box-shadow:
+        0 40px 80px rgba(30,26,46,0.3),
+        0 0 0 1px rgba(255,255,255,0.1);
+      position: relative;
+      z-index: 2;
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: var(--warm-white);
+      border-radius: 30px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .phone-header {
+      background: var(--warm-white);
+      padding: 1rem 1rem 0.5rem;
+      border-bottom: 1px solid rgba(91,63,166,0.08);
+    }
+
+    .phone-app-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: var(--purple);
+    }
+
+    .phone-body {
+      flex: 1;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .phone-greeting {
+      background: white;
+      border-radius: 16px;
+      padding: 0.8rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .phone-chef-emoji {
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .phone-greeting-text {
+      font-size: 0.65rem;
+      font-weight: 500;
+      color: var(--charcoal);
+      line-height: 1.4;
+    }
+
+    .phone-input {
+      background: white;
+      border-radius: 12px;
+      padding: 0.7rem 0.8rem;
+      font-size: 0.65rem;
+      color: var(--gray);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .phone-recent {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .phone-chip {
+      background: white;
+      border: 1px solid rgba(91,63,166,0.2);
+      color: var(--purple);
+      border-radius: 100px;
+      padding: 0.2rem 0.6rem;
+      font-size: 0.55rem;
+    }
+
+    .phone-btn {
+      background: var(--purple);
+      color: white;
+      border-radius: 100px;
+      padding: 0.6rem;
+      text-align: center;
+      font-size: 0.65rem;
+      font-weight: 500;
+    }
+
+    .phone-usage {
+      font-size: 0.55rem;
+      color: var(--gray);
+      text-align: center;
+    }
+
+    .phone-chef-img {
+      flex: 1;
+      background: linear-gradient(135deg, rgba(91,63,166,0.05), rgba(232,98,42,0.05));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+
+    /* floating badges around phone */
+    .float-badge {
+      position: absolute;
+      background: white;
+      border-radius: 16px;
+      padding: 0.6rem 1rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      font-size: 0.8rem;
+      font-weight: 500;
+      white-space: nowrap;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .float-badge-1 {
+      top: 10%;
+      left: -15%;
+      animation-delay: 0s;
+    }
+
+    .float-badge-2 {
+      top: 40%;
+      right: -18%;
+      animation-delay: 1s;
+    }
+
+    .float-badge-3 {
+      bottom: 15%;
+      left: -12%;
+      animation-delay: 2s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* ── HOW IT WORKS ── */
+    .section {
+      padding: 6rem 5rem;
+    }
+
+    .section-label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      font-size: 1.1rem;
+      color: var(--gray);
+      font-weight: 300;
+      max-width: 500px;
+      line-height: 1.7;
+      margin-bottom: 3.5rem;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .step {
+      background: white;
+      border-radius: 24px;
+      padding: 2rem;
+      position: relative;
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: 1px solid rgba(91,63,166,0.08);
+    }
+
+    .step:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(91,63,166,0.12);
+    }
+
+    .step-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: rgba(91,63,166,0.08);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .step-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .step-title {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: var(--charcoal);
+    }
+
+    .step-desc {
+      font-size: 0.9rem;
+      color: var(--gray);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* ── FEATURES ── */
+    .features-section {
+      background: var(--charcoal);
+      color: white;
+      padding: 6rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .features-section::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(91,63,166,0.3) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .features-section .section-title { color: white; }
+    .features-section .section-sub { color: rgba(255,255,255,0.5); }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .feature-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 1.8rem;
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .feature-card:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(91,63,166,0.4);
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-title {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: white;
+    }
+
+    .feature-desc {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    .feature-card.highlight {
+      background: var(--purple);
+      border-color: var(--purple);
+      grid-column: span 2;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .feature-card.highlight .feature-desc { color: rgba(255,255,255,0.7); }
+
+    /* ── LANGUAGES ── */
+    .langs-section {
+      padding: 6rem 5rem;
+      text-align: center;
+    }
+
+    .lang-flags {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-top: 3rem;
+    }
+
+    .lang-flag {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1.2rem 1.5rem;
+      background: white;
+      border-radius: 16px;
+      border: 1px solid rgba(91,63,166,0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+      min-width: 80px;
+    }
+
+    .lang-flag:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(91,63,166,0.1);
+    }
+
+    .lang-flag .flag { font-size: 2rem; }
+    .lang-flag .lang-name { font-size: 0.75rem; color: var(--gray); font-weight: 500; }
+
+    /* ── PRICING ── */
+    .pricing-section {
+      padding: 6rem 5rem;
+      background: var(--warm-white);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .price-card {
+      background: white;
+      border-radius: 24px;
+      padding: 2.5rem;
+      border: 2px solid rgba(91,63,166,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .price-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(91,63,166,0.1);
+    }
+
+    .price-card.featured {
+      border-color: var(--purple);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .price-card.featured::before {
+      content: 'Most Popular';
+      position: absolute;
+      top: 1.2rem; right: -2rem;
+      background: var(--orange);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 500;
+      padding: 0.3rem 2.5rem;
+      transform: rotate(35deg);
+      letter-spacing: 0.05em;
+    }
+
+    .price-plan {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 1rem;
+    }
+
+    .price-amount {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--charcoal);
+      margin-bottom: 0.3rem;
+    }
+
+    .price-amount sup {
+      font-size: 1.2rem;
+      vertical-align: super;
+    }
+
+    .price-period {
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin-bottom: 2rem;
+    }
+
+    .price-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      margin-bottom: 2rem;
+    }
+
+    .price-features li {
+      font-size: 0.9rem;
+      color: var(--gray);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .price-features li::before {
+      content: '✓';
+      color: var(--purple);
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+
+    .price-btn {
+      width: 100%;
+      padding: 0.9rem;
+      border-radius: 100px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-align: center;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: block;
+    }
+
+    .price-btn-free {
+      background: rgba(91,63,166,0.08);
+      color: var(--purple);
+    }
+
+    .price-btn-free:hover { background: rgba(91,63,166,0.15); }
+
+    .price-btn-pro {
+      background: var(--purple);
+      color: white;
+      box-shadow: 0 4px 20px rgba(91,63,166,0.3);
+    }
+
+    .price-btn-pro:hover {
+      background: var(--purple-dark);
+      transform: translateY(-1px);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--charcoal);
+      color: rgba(255,255,255,0.5);
+      padding: 3rem 5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: white;
+    }
+
+    .footer-logo span { color: var(--orange); }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .footer-links a {
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: white; }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      width: 100%;
+      text-align: center;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 1rem;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 7rem 2rem 3rem;
+        text-align: center;
+      }
+
+      .hero-actions { justify-content: center; }
+      .hero-visual { display: none; }
+      .steps { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .feature-card.highlight { grid-column: span 1; grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
+      #import > div { grid-template-columns: 1fr !important; }
+      #import .section-title em { display: inline; }
+      [style*="grid-template-columns:repeat(3,1fr)"] { grid-template-columns: 1fr !important; }
+      .section { padding: 4rem 2rem; }
+      .features-section { padding: 4rem 2rem; }
+      .pricing-section { padding: 4rem 2rem; }
+      .langs-section { padding: 4rem 2rem; }
+      footer { padding: 2rem; flex-direction: column; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+      nav { padding: 1rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Voca<span>Chef</span></div>
+    <a href="#download" class="nav-cta">Get the App</a>
+  </nav>
+
+  <!-- DISCLAIMER BANNER -->
+  <div style="background:#fff8f0; border-bottom:1px solid rgba(232,98,42,0.2); padding:0.6rem 2rem; text-align:center; margin-top:64px;">
+    <p style="font-size:0.78rem; color:#8a6040; margin:0; font-weight:400;">
+      ⚠️ VocaChef recipes are AI-generated. Always verify ingredients against your dietary needs, allergies, and intolerances before cooking.
+      <a href="terms.html" style="color:var(--orange); text-decoration:underline; margin-left:0.3rem;">Learn more</a>
+    </p>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <div class="hero-badge">🎤 AI-Powered Cooking Coach</div>
+      <h1 class="hero-title">
+        Your kitchen.<br/>
+        Your voice.<br/>
+        <em>Your recipe.</em>
+      </h1>
+      <p class="hero-tagline">
+        <strong>Cook smarter. Talk more. Touch less.</strong><br/>
+        VocaChef generates custom recipes with AI, then guides you through every step — completely hands-free.
+      </p>
+      <div class="hero-actions">
+        <a href="#download" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.24.99.21l13.6-7.86-2.98-2.98-11.61 10.63zM.5 1.03C.19 1.37 0 1.88 0 2.54v18.91c0 .66.19 1.17.5 1.51l.08.08 10.6-10.6v-.25L.58.95.5 1.03zM21.27 10.1l-2.88-1.66-3.27 3.27 3.27 3.27 2.9-1.67c.83-.48.83-1.26-.02-1.74v.03zM4.17.24L17.77 8.1l-2.98 2.98L4.17.24z"/></svg>
+          Download for Android
+        </a>
+        <a href="#how-it-works" class="btn-secondary">See how it works →</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <!-- Floating badges -->
+      <div class="float-badge float-badge-1">🎤 "Chef, next step!"</div>
+      <div class="float-badge float-badge-2">✨ 3 recipe options</div>
+      <div class="float-badge float-badge-3">🌍 7 languages</div>
+
+      <!-- Phone mockup -->
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="phone-header">
+            <div class="phone-app-title">VocaChef</div>
+          </div>
+          <div class="phone-body">
+            <div class="phone-greeting">
+              <div class="phone-chef-emoji">👨‍🍳</div>
+              <div class="phone-greeting-text">Ciao! I'm Marco, your VocaChef!<br/>Let's cook something delicious!</div>
+            </div>
+            <div class="phone-input">What shall we cook today? 📋</div>
+            <div style="font-size:0.55rem; color: var(--gray);">Recent:</div>
+            <div class="phone-recent">
+              <div class="phone-chip">onion soup</div>
+              <div class="phone-chip">pasta carbonara</div>
+            </div>
+            <div class="phone-btn">✨ Let's Cook!</div>
+            <div class="phone-usage">5 / 5 free sessions remaining</div>
+            <div class="phone-chef-img">👨‍🍳</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section" id="how-it-works">
+    <div class="section-label">How it works</div>
+    <h2 class="section-title">From idea to dinner<br/>in three steps</h2>
+    <p class="section-sub">No recipe books. No scrolling. Just tell VocaChef what you're craving.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">01</div>
+        <div class="step-icon">✨</div>
+        <div class="step-title">Tell Marco what to cook</div>
+        <div class="step-desc">Type a dish name or list what's in your fridge. VocaChef's AI generates 3 tailored recipe options — Easy, Medium, or Hard — in seconds.</div>
+      </div>
+      <div class="step">
+        <div class="step-number">02</div>
+        <div class="step-icon">🛒</div>
+        <div class="step-title">Check your ingredients</div>
+        <div class="step-desc">Review your ingredient list, tick what you have, and find smart substitutes for anything missing. No extra trips to the store.</div>
+      </div>
+      <div class="step">
+        <div class="step-number">03</div>
+        <div class="step-icon">🎤</div>
+        <div class="step-title">Cook hands-free with your voice</div>
+        <div class="step-desc">Say "Chef" to wake Marco up, then give commands. "Next", "Repeat", "Ingredients" — all without touching your phone. Cook like a pro.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features-section" id="features">
+    <div class="section-label" style="color: var(--orange-light);">Features</div>
+    <h2 class="section-title" style="margin-bottom:0.5rem;">Everything you need.<br/>Nothing you don't.</h2>
+    <p class="section-sub" style="margin-bottom:3.5rem;">Built for real kitchens, real cooks, and real messy hands.</p>
+
+    <div class="features-grid">
+      <div class="feature-card highlight">
+        <div class="feature-icon" style="font-size:3rem;">🎤</div>
+        <div>
+          <div class="feature-title" style="font-size:1.2rem;">Voice-First Cooking</div>
+          <div class="feature-desc" style="font-size:0.95rem;">Say "Chef" to activate Marco, then navigate your recipe entirely by voice. Next step, repeat, show ingredients — all hands-free. Works even when your hands are covered in dough.</div>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <div class="feature-title">AI Recipe Generation</div>
+        <div class="feature-desc">No fixed recipe database. VocaChef generates a fresh recipe just for you, every time, tailored to your ingredients and skill level.</div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🍽️</div>
+        <div class="feature-title">3 Options Every Time</div>
+        <div class="feature-desc">Get Easy, Medium, and Hard versions of your dish. Pick the challenge that fits your mood and skill level today.</div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🔄</div>
+        <div class="feature-title">Smart Substitutes</div>
+        <div class="feature-desc">Missing an ingredient? VocaChef suggests 2-3 smart alternatives so you never have to abandon a recipe mid-cook.</div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🌍</div>
+        <div class="feature-title">7 Languages</div>
+        <div class="feature-desc">Cook in English, Hebrew, French, Spanish, German, Russian, or Japanese. Voice commands work in your language too.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BRING YOUR OWN RECIPE -->
+  <section class="section" id="import" style="background: var(--warm-white);">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center;">
+      <div>
+        <div class="section-label">Your Recipes. Your Rules.</div>
+        <h2 class="section-title">Already have a recipe<br/>you <em style="font-style:italic; color:var(--orange);">trust?</em></h2>
+        <p class="section-sub" style="margin-bottom:2rem;">
+          VocaChef isn't just a recipe generator — it's a cooking coach for <strong>any</strong> recipe. Paste in your grandmother's handwritten brisket, a WhatsApp message from a friend, or something you found online. Marco will walk you through it step by step, hands-free, just like your own personal sous-chef.
+        </p>
+        <div style="display:flex; flex-direction:column; gap:1rem;">
+          <div style="display:flex; gap:1rem; align-items:flex-start;">
+            <div style="background:rgba(91,63,166,0.1); color:var(--purple); border-radius:12px; padding:0.6rem; font-size:1.2rem; flex-shrink:0;">📋</div>
+            <div>
+              <div style="font-weight:500; margin-bottom:0.2rem;">Paste any recipe</div>
+              <div style="font-size:0.9rem; color:var(--gray); font-weight:300;">From WhatsApp, notes, websites, cooking books — if you can copy it, VocaChef can guide you through it.</div>
+            </div>
+          </div>
+          <div style="display:flex; gap:1rem; align-items:flex-start;">
+            <div style="background:rgba(232,98,42,0.1); color:var(--orange); border-radius:12px; padding:0.6rem; font-size:1.2rem; flex-shrink:0;">🧠</div>
+            <div>
+              <div style="font-weight:500; margin-bottom:0.2rem;">AI parses it intelligently</div>
+              <div style="font-size:0.9rem; color:var(--gray); font-weight:300;">Marco understands informal language, mixed units, and vague instructions — even "cook until it smells right."</div>
+            </div>
+          </div>
+          <div style="display:flex; gap:1rem; align-items:flex-start;">
+            <div style="background:rgba(91,63,166,0.1); color:var(--purple); border-radius:12px; padding:0.6rem; font-size:1.2rem; flex-shrink:0;">🎤</div>
+            <div>
+              <div style="font-weight:500; margin-bottom:0.2rem;">Then cook it hands-free</div>
+              <div style="font-size:0.9rem; color:var(--gray); font-weight:300;">Same voice experience as AI-generated recipes. Your trusted recipe, Marco's guided coaching.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Visual: recipe card being pasted -->
+      <div style="position:relative; display:flex; justify-content:center;">
+        <div style="background:white; border-radius:24px; padding:2rem; box-shadow:0 20px 60px rgba(30,26,46,0.12); border:1px solid rgba(91,63,166,0.08); max-width:320px; width:100%;">
+          <div style="font-size:0.7rem; font-weight:500; color:var(--gray); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1rem;">📱 Pasted from WhatsApp</div>
+          <div style="background:var(--cream); border-radius:12px; padding:1rem; font-size:0.8rem; color:var(--charcoal); line-height:1.7; margin-bottom:1.5rem; font-family:'DM Sans', sans-serif; border-left:3px solid var(--orange);">
+            Grandma's Chicken Soup 🍲<br/>
+            Boil whole chicken with onion,<br/>
+            carrots & celery for 2 hours.<br/>
+            Remove chicken, shred the meat.<br/>
+            Add noodles, cook 10 more min.<br/>
+            Season with salt & love. ❤️
+          </div>
+          <div style="background:var(--purple); color:white; border-radius:100px; padding:0.7rem 1.2rem; text-align:center; font-size:0.85rem; font-weight:500; cursor:pointer;">
+            ✨ Guide me through this
+          </div>
+          <div style="margin-top:1rem; display:flex; align-items:center; gap:0.5rem; justify-content:center;">
+            <div style="width:8px; height:8px; background:var(--orange); border-radius:50%; animation:pulse 1.5s ease-in-out infinite;"></div>
+            <div style="font-size:0.75rem; color:var(--gray);">Marco is ready. Say "Chef" to begin.</div>
+          </div>
+        </div>
+        <!-- decorative tag -->
+        <div style="position:absolute; top:-1rem; right:-1rem; background:var(--orange); color:white; border-radius:100px; padding:0.4rem 1rem; font-size:0.75rem; font-weight:500; box-shadow:0 4px 12px rgba(232,98,42,0.3);">
+          Works with any recipe!
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMING SOON ROADMAP -->
+  <section class="section" style="background:var(--charcoal); color:white; text-align:center;">
+    <div class="section-label" style="color:var(--orange-light); text-align:center;">What's Coming</div>
+    <h2 class="section-title" style="color:white; text-align:center; margin-bottom:0.5rem;">The future of your kitchen</h2>
+    <p class="section-sub" style="margin:0 auto 3.5rem; text-align:center; color:rgba(255,255,255,0.5);">We're just getting started. Here's what's cooking next.</p>
+
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; max-width:900px; margin:0 auto;">
+      <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:20px; padding:2rem; text-align:left;">
+        <div style="font-size:2.5rem; margin-bottom:1rem;">📸</div>
+        <div style="font-size:0.7rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--orange-light); margin-bottom:0.5rem;">Coming Soon</div>
+        <div style="font-size:1rem; font-weight:500; margin-bottom:0.5rem; color:white;">Photo Recipe Import</div>
+        <div style="font-size:0.85rem; color:rgba(255,255,255,0.45); font-weight:300; line-height:1.6;">Point your camera at a handwritten recipe in your old notebook. Marco reads it, parses it, and guides you through it.</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:20px; padding:2rem; text-align:left;">
+        <div style="font-size:2.5rem; margin-bottom:1rem;">💬</div>
+        <div style="font-size:0.7rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--orange-light); margin-bottom:0.5rem;">Coming Soon</div>
+        <div style="font-size:1rem; font-weight:500; margin-bottom:0.5rem; color:white;">Import from Apps</div>
+        <div style="font-size:0.85rem; color:rgba(255,255,255,0.45); font-weight:300; line-height:1.6;">Share a recipe directly from WhatsApp, Notes, or any app into VocaChef with one tap. No copy-pasting needed.</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:20px; padding:2rem; text-align:left;">
+        <div style="font-size:2.5rem; margin-bottom:1rem;">🍎</div>
+        <div style="font-size:0.7rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--orange-light); margin-bottom:0.5rem;">Coming Soon</div>
+        <div style="font-size:1rem; font-weight:500; margin-bottom:0.5rem; color:white;">iOS Version</div>
+        <div style="font-size:0.85rem; color:rgba(255,255,255,0.45); font-weight:300; line-height:1.6;">VocaChef for iPhone and iPad is in the works. Join the waitlist to be first to know when it's ready.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LANGUAGES -->
+  <section class="langs-section">
+    <div class="section-label" style="text-align:center;">Global Kitchen</div>
+    <h2 class="section-title" style="text-align:center;">Cook in your language</h2>
+    <p class="section-sub" style="margin: 0 auto 0; text-align:center;">Voice commands, recipes, and the whole experience — in 7 languages. More on the way.</p>
+
+    <div class="lang-flags">
+      <div class="lang-flag"><span class="flag">🇺🇸</span><span class="lang-name">English</span></div>
+      <div class="lang-flag"><span class="flag">🇮🇱</span><span class="lang-name">Hebrew</span></div>
+      <div class="lang-flag"><span class="flag">🇫🇷</span><span class="lang-name">French</span></div>
+      <div class="lang-flag"><span class="flag">🇪🇸</span><span class="lang-name">Spanish</span></div>
+      <div class="lang-flag"><span class="flag">🇩🇪</span><span class="lang-name">German</span></div>
+      <div class="lang-flag"><span class="flag">🇷🇺</span><span class="lang-name">Russian</span></div>
+      <div class="lang-flag"><span class="flag">🇯🇵</span><span class="lang-name">Japanese</span></div>
+      <div class="lang-flag" style="border-style:dashed; opacity:0.6;">
+        <span class="flag">🇮🇹</span><span class="lang-name">Italian</span>
+        <span style="font-size:0.55rem; color:var(--orange); font-weight:500;">Soon</span>
+      </div>
+      <div class="lang-flag" style="border-style:dashed; opacity:0.6;">
+        <span class="flag">🇵🇹</span><span class="lang-name">Portuguese</span>
+        <span style="font-size:0.55rem; color:var(--orange); font-weight:500;">Soon</span>
+      </div>
+      <div class="lang-flag" style="border-style:dashed; opacity:0.5;">
+        <span class="flag">🌍</span><span class="lang-name">& more...</span>
+        <span style="font-size:0.55rem; color:var(--orange); font-weight:500;">Coming</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing-section" id="pricing">
+    <div style="text-align:center;">
+      <div class="section-label" style="text-align:center;">Pricing</div>
+      <h2 class="section-title" style="text-align:center;">Start free.<br/>Cook unlimited.</h2>
+      <p class="section-sub" style="margin: 0 auto 3.5rem; text-align:center;">Try VocaChef free — no credit card needed.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-plan">Free</div>
+        <div class="price-amount">₪<span>0</span></div>
+        <div class="price-period">forever</div>
+        <ul class="price-features">
+          <li>5 cooking sessions</li>
+          <li>All 7 languages</li>
+          <li>Voice commands</li>
+          <li>3 recipe options per session</li>
+          <li>Ingredient substitutes</li>
+        </ul>
+        <a href="#download" class="price-btn price-btn-free">Get Started Free</a>
+      </div>
+
+      <div class="price-card featured">
+        <div class="price-plan">Pro</div>
+        <div class="price-amount">₪<span>14.90</span></div>
+        <div class="price-period">per month · or ₪99/year (save 45%)</div>
+        <ul class="price-features">
+          <li>100 sessions per month</li>
+          <li>Everything in Free</li>
+          <li>Priority AI generation</li>
+          <li>Custom voice commands</li>
+          <li>Early access to new features</li>
+        </ul>
+        <a href="#download" class="price-btn price-btn-pro">Go Pro</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOWNLOAD -->
+  <section class="section" id="download" style="text-align:center; background: var(--charcoal); color: white;">
+    <div class="section-label" style="color: var(--orange-light); text-align:center;">Download</div>
+    <h2 class="section-title" style="color:white; text-align:center;">Ready to cook smarter?</h2>
+    <p class="section-sub" style="margin: 0 auto 3rem; text-align:center; color: rgba(255,255,255,0.5);">Join home cooks who've discovered the joy of hands-free cooking with VocaChef.</p>
+    <a href="https://play.google.com/store" class="btn-primary" style="display:inline-flex; margin: 0 auto;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.24.99.21l13.6-7.86-2.98-2.98-11.61 10.63zM.5 1.03C.19 1.37 0 1.88 0 2.54v18.91c0 .66.19 1.17.5 1.51l.08.08 10.6-10.6v-.25L.58.95.5 1.03zM21.27 10.1l-2.88-1.66-3.27 3.27 3.27 3.27 2.9-1.67c.83-.48.83-1.26-.02-1.74v.03zM4.17.24L17.77 8.1l-2.98 2.98L4.17.24z"/></svg>
+      Download on Google Play
+    </a>
+    <p style="margin-top:1.5rem; font-size:0.85rem; color:rgba(255,255,255,0.3);">iOS coming soon</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Voca<span>Chef</span></div>
+    <div class="footer-links">
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Service</a>
+      <a href="/cdn-cgi/l/email-protection#d1a2a4a1a1bea3a591a7beb2b0b2b9b4b7ffb2bebc">Support</a>
+    </div>
+    <div class="footer-copy">© 2026 VocaChef. All rights reserved. Made with ❤️ a

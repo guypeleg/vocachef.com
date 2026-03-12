@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — VocaChef</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #faf6f0;
+      --purple: #5b3fa6;
+      --orange: #e8622a;
+      --charcoal: #1e1a2e;
+      --gray: #6b6478;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--charcoal); }
+
+    nav {
+      padding: 1.2rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(250,246,240,0.95);
+      border-bottom: 1px solid rgba(91,63,166,0.08);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: var(--purple); text-decoration: none; }
+    .nav-logo span { color: var(--orange); }
+    .nav-back { color: var(--purple); font-size: 0.9rem; font-weight: 500; text-decoration: none; }
+    .nav-back:hover { text-decoration: underline; }
+
+    .container { max-width: 760px; margin: 0 auto; padding: 4rem 2rem 6rem; }
+
+    h1 { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 900; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+    .meta { font-size: 0.85rem; color: var(--gray); margin-bottom: 3rem; }
+
+    h2 { font-size: 1.15rem; font-weight: 500; margin: 2.5rem 0 0.7rem; color: var(--charcoal); }
+    p { font-size: 0.95rem; color: var(--gray); line-height: 1.8; font-weight: 300; margin-bottom: 0.8rem; }
+    ul { padding-left: 1.5rem; margin-bottom: 0.8rem; }
+    ul li { font-size: 0.95rem; color: var(--gray); line-height: 1.8; font-weight: 300; margin-bottom: 0.3rem; }
+    a { color: var(--purple); }
+
+    .divider { border: none; border-top: 1px solid rgba(91,63,166,0.1); margin: 2rem 0; }
+
+    footer { text-align: center; padding: 2rem; font-size: 0.8rem; color: var(--gray); border-top: 1px solid rgba(91,63,166,0.08); }
+    footer a { color: var(--purple); text-decoration: none; margin: 0 0.75rem; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Voca<span>Chef</span></a>
+  <a href="index.html" class="nav-back">← Back to home</a>
+</nav>
+
+<div class="container">
+  <h1>Privacy Policy</h1>
+  <p class="meta">Last updated: March 2026</p>
+
+  <p>VocaChef ("we", "our", or "us") is committed to protecting your privacy. This policy explains what information we collect, how we use it, and your rights regarding your data when you use the VocaChef mobile application and website (vocachef.com).</p>
+
+  <hr class="divider" />
+
+  <h2>1. Information We Collect</h2>
+  <p>We collect only the information necessary to provide the VocaChef service:</p>
+  <ul>
+    <li><strong>Account information:</strong> If you create an account, we store your email address and authentication credentials via Firebase Authentication.</li>
+    <li><strong>Usage data:</strong> Number of cooking sessions used, subscription status, and app language preference.</li>
+    <li><strong>Recipe inputs:</strong> Text you enter or paste into the app to generate or import recipes. This is sent to our AI service (OpenAI) to generate recipe content and is not permanently stored by us.</li>
+    <li><strong>Voice data:</strong> Voice recognition is processed entirely on your device using your operating system's built-in speech recognition. We do not record, transmit, or store your voice.</li>
+    <li><strong>Device information:</strong> Basic device type and OS version for debugging purposes.</li>
+  </ul>
+
+  <h2>2. How We Use Your Information</h2>
+  <ul>
+    <li>To generate personalized recipes using AI</li>
+    <li>To manage your account and subscription</li>
+    <li>To track your session usage against your plan limits</li>
+    <li>To improve the app's performance and fix bugs</li>
+    <li>To communicate with you about your account or support requests</li>
+  </ul>
+
+  <h2>3. Data Sharing</h2>
+  <p>We do not sell your personal data. We share data only with the following third-party services necessary to operate VocaChef:</p>
+  <ul>
+    <li><strong>OpenAI:</strong> Recipe text inputs are sent to OpenAI's API to generate recipe content. OpenAI's privacy policy applies to this data.</li>
+    <li><strong>Firebase (Google):</strong> Used for authentication and usage tracking. Google's privacy policy applies.</li>
+    <li><strong>Google Play:</strong> Subscription and billing are managed by Google Play. Google's privacy policy applies.</li>
+    <li><strong>Railway:</strong> Our backend server is hosted on Railway. No personal data is permanently stored on Railway beyond server logs.</li>
+  </ul>
+
+  <h2>4. Voice & Microphone</h2>
+  <p>VocaChef uses your device microphone solely for the hands-free voice command feature. All voice processing happens on-device using Android's built-in speech recognition engine. We do not have access to your microphone audio, and no voice data is transmitted to our servers.</p>
+
+  <h2>5. Data Retention</h2>
+  <p>We retain your account data for as long as your account is active. If you delete your account, we will delete your personal data within 30 days. Recipe inputs are not stored after the session ends.</p>
+
+  <h2>6. Children's Privacy</h2>
+  <p>VocaChef is not directed at children under 13. We do not knowingly collect personal information from children under 13. If you believe a child has provided us with personal information, please contact us and we will delete it promptly.</p>
+
+  <h2>7. Your Rights</h2>
+  <p>Depending on your location, you may have the right to:</p>
+  <ul>
+    <li>Access the personal data we hold about you</li>
+    <li>Request correction of inaccurate data</li>
+    <li>Request deletion of your data</li>
+    <li>Object to or restrict certain processing</li>
+    <li>Data portability</li>
+  </ul>
+  <p>To exercise any of these rights, please contact us at <a href="mailto:support@vocachef.com">support@vocachef.com</a>.</p>
+
+  <h2>8. Security</h2>
+  <p>We use industry-standard security measures including HTTPS encryption for all data in transit and secure credential management for our backend services. However, no method of transmission over the internet is 100% secure.</p>
+
+  <h2>9. Changes to This Policy</h2>
+  <p>We may update this policy from time to time. We will notify you of significant changes via the app or by email. Continued use of VocaChef after changes constitutes acceptance of the updated policy.</p>
+
+  <h2>10. Contact Us</h2>
+  <p>If you have any questions about this Privacy Policy, please contact us at:<br/>
+  📧 <a href="mailto:support@vocachef.com">support@vocachef.com</a><br/>
+  🌐 <a href="https://vocachef.com">vocachef.com</a></p>
+</div>
+
+<footer>
+  <a href="index.html">Home</a>
+  <a href="privacy.html">Privacy Policy</a>
+  <a href="terms.html">Terms of Service</a>
+  <a href="mailto:support@vocachef.com">Contact</a>
+  <p style="margin-top:1rem;">© 2026 VocaChef. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

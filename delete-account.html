@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Delete Account — VocaChef</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #ff6b35;
+      --primary-dark: #e55a25;
+      --bg: #0f0f0f;
+      --surface: #1a1a1a;
+      --surface2: #242424;
+      --border: #2e2e2e;
+      --text: #f0f0f0;
+      --text-muted: #888;
+      --text-dim: #555;
+      --red: #e53e3e;
+      --red-bg: #2d1010;
+      --red-border: #5a1a1a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Georgia', serif;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(15,15,15,0.95);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-family: 'Georgia', serif;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--text);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-logo span { color: var(--primary); }
+
+    .nav-back {
+      font-family: 'Georgia', serif;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-back:hover { color: var(--primary); }
+
+    /* MAIN */
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+    }
+
+    h1 {
+      font-family: 'Georgia', serif;
+      font-size: 2.4rem;
+      font-weight: normal;
+      margin-bottom: 0.4rem;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+
+    h2 {
+      font-family: 'Georgia', serif;
+      font-size: 1.3rem;
+      font-weight: normal;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    p {
+      color: #c0c0c0;
+      margin-bottom: 1rem;
+      font-size: 0.97rem;
+    }
+
+    /* WARNING BOX */
+    .warning-box {
+      background: var(--red-bg);
+      border: 1px solid var(--red-border);
+      border-left: 4px solid var(--red);
+      border-radius: 8px;
+      padding: 1.2rem 1.4rem;
+      margin: 2rem 0;
+    }
+
+    .warning-box p {
+      color: #f0a0a0;
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    .warning-box strong {
+      color: #f87171;
+    }
+
+    /* STEPS */
+    .steps {
+      list-style: none;
+      margin: 1.5rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .steps li {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+    }
+
+    .step-number {
+      background: var(--primary);
+      color: white;
+      font-family: 'Georgia', serif;
+      font-size: 0.85rem;
+      font-weight: bold;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .step-text {
+      color: #c0c0c0;
+      font-size: 0.97rem;
+      line-height: 1.6;
+    }
+
+    .step-text strong {
+      color: var(--text);
+    }
+
+    /* INFO BOX */
+    .info-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.4rem;
+      margin: 1.5rem 0;
+    }
+
+    .info-box p {
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    /* EMAIL LINK */
+    a.email-link {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a.email-link:hover {
+      text-decoration: underline;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--primary); }
+
+    .footer-copy {
+      color: var(--text-dim);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.8rem; }
+      main { padding: 2rem 1.2rem 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="https://vocachef.com">Voca<span>Chef</span></a>
+    <a class="nav-back" href="https://vocachef.com">← Back to home</a>
+  </nav>
+
+  <main>
+    <h1>Delete Your Account</h1>
+    <p class="subtitle">Last updated: March 2026</p>
+
+    <hr>
+
+    <p>You can delete your VocaChef account at any time directly from within the app. Deleting your account is permanent and cannot be undone.</p>
+
+    <div class="warning-box">
+      <p><strong>⚠️ Warning:</strong> Deleting your account will permanently remove all your data, including your profile, session history, and subscription status. <strong>This action cannot be reversed.</strong></p>
+    </div>
+
+    <h2>How to delete your account</h2>
+
+    <ol class="steps">
+      <li>
+        <div class="step-number">1</div>
+        <div class="step-text">Open the <strong>VocaChef</strong> app on your Android device.</div>
+      </li>
+      <li>
+        <div class="step-number">2</div>
+        <div class="step-text">Tap the <strong>Settings</strong> icon (⚙️) at the top of the home screen.</div>
+      </li>
+      <li>
+        <div class="step-number">3</div>
+        <div class="step-text">Scroll down to the <strong>My Data</strong> section.</div>
+      </li>
+      <li>
+        <div class="step-number">4</div>
+        <div class="step-text">Tap <strong>Delete my account</strong> and confirm when prompted.</div>
+      </li>
+    </ol>
+
+    <p>Your account and all associated data will be deleted immediately from our systems.</p>
+
+    <hr>
+
+    <h2>What gets deleted</h2>
+
+    <p>When you delete your account, the following data is permanently removed:</p>
+
+    <div class="info-box">
+      <p>✓ &nbsp;Your profile (name, email address)<br>
+         ✓ &nbsp;Your session and usage history<br>
+         ✓ &nbsp;Your subscription status<br>
+         ✓ &nbsp;All app preferences and settings</p>
+    </div>
+
+    <p>Note: If you have an active Pro subscription, deleting your account does not automatically cancel your Google Play subscription. Please cancel it separately through <strong>Google Play → Subscriptions</strong> before or after deleting your account.</p>
+
+    <hr>
+
+    <h2>Need help?</h2>
+
+    <p>If you're having trouble deleting your account from the app, or if you'd like to request manual deletion, please contact us at <a class="email-link" href="mailto:support@vocachef.com">support@vocachef.com</a> and we'll take care of it within 30 days.</p>
+
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="https://vocachef.com">Home</a>
+      <a href="https://vocachef.com/privacy">Privacy Policy</a>
+      <a href="https://vocachef.com/terms">Terms of Service</a>
+      <a href="mailto:support@vocachef.com">Contact</a>
+    </div>
+    <p class="footer-copy">© 2026 VocaChef. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
